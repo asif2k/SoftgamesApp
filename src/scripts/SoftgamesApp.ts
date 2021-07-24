@@ -6,6 +6,7 @@ import { AppEngine, TextMenuScene } from './PIXIAppEngine';
 
 
 import CardsDeckScene from './CardsDeck';
+import EmojiTextScene from './EmojiText';
 
 
 export default class SoftgamesApp extends AppEngine {
@@ -34,11 +35,13 @@ export default class SoftgamesApp extends AppEngine {
             this.setActiveScene("menu")
         }
         const loader = new PIXI.Loader()
-        const cardsDeck = new CardsDeckScene(this, returnToMenu)
+        const cardsDeckScene = new CardsDeckScene(this, returnToMenu)
+        const emojiTextScene = new EmojiTextScene(this, returnToMenu)
 
 
 
-        cardsDeck.init(loader);
+        cardsDeckScene.init(loader);
+        emojiTextScene.init(loader);
 
 
         menu.add("CARDS DECK", () => {
@@ -46,7 +49,7 @@ export default class SoftgamesApp extends AppEngine {
         })
 
         menu.add("EMOJI TEXT", () => {
-
+            this.setActiveScene("emoji-text");
         })
 
         menu.add("FIRE EFFECT", () => {
@@ -56,7 +59,8 @@ export default class SoftgamesApp extends AppEngine {
 
 
         this.addScene("menu", menu);
-        this.addScene("cards-deck", cardsDeck)
+        this.addScene("cards-deck", cardsDeckScene)
+        this.addScene("emoji-text", emojiTextScene)
 
         this.setActiveScene("menu")
 
@@ -66,8 +70,12 @@ export default class SoftgamesApp extends AppEngine {
         loader.load((loader, resources: Partial<Record<string, PIXI.LoaderResource>>) => {
 
 
-            cardsDeck.build(resources)
-            cardsDeck.resize(this.renderer.width, this.renderer.height)
+            cardsDeckScene.build(resources)
+            cardsDeckScene.resize(this.renderer.width, this.renderer.height)
+
+            emojiTextScene.build(resources)
+            emojiTextScene.resize(this.renderer.width, this.renderer.height)
+
             this.start(() => {
 
             })

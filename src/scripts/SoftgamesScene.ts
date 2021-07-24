@@ -19,6 +19,9 @@ export default class SoftgamesScene extends Scene {
 
     }
 
+    public init(loader: PIXI.Loader) {
+
+    }
 
 
 
