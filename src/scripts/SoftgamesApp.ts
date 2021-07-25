@@ -26,6 +26,7 @@ export default class SoftgamesApp extends AppEngine {
         fpsDisplay.style.left = "10px";
         fpsDisplay.style.top = "10px";
         fpsDisplay.style.color = "#ffffff";
+        fpsDisplay.style.fontSize = "26px"
 
 
         this.container.appendChild(fpsDisplay)
@@ -58,6 +59,13 @@ export default class SoftgamesApp extends AppEngine {
 
         menu.add("FIRE EFFECT", () => {
             this.setActiveScene("fire-effect");
+        })
+
+
+        menu.add("FULL SCREEN", () => {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
         })
 
 

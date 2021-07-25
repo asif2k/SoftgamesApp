@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js'
 
+
+//base scene class to manage seperate demos
 export class Scene extends PIXI.Container {
     public engine: AppEngine
     public constructor(engine: AppEngine) {
@@ -18,7 +20,7 @@ export class Scene extends PIXI.Container {
 
 
 
-
+// scene manager keeps the collection of all scences in the application
 export class ScenesManager {
     public scenes = new Map<string, Scene>()
 
@@ -33,6 +35,8 @@ export class ScenesManager {
     }
 }
 
+
+//base application engine that host all scene and handle rendering
 export class AppEngine {
 
     public loader: PIXI.Loader;
@@ -94,7 +98,6 @@ export class AppEngine {
 
             currentTime = performance.now() * 0.001;
             currentTimeDelta = currentTime - lastTime;
-            //console.log(currentTimeDelta, this.requiredTimeDelta)
             if (currentTimeDelta < this.requiredTimeDelta) {
                 return
             }
@@ -128,18 +131,17 @@ export class AppEngine {
         requestAnimationFrame(step1);
     }
 
-} // Engine
+}
 
 
-
-
+//generic textbutton that are used to display clickable text on screen
 export class TextButton extends PIXI.Text {
     static labelStyle = new PIXI.TextStyle({
         fontFamily: 'Arial',
         fontSize: 36,
         fontStyle: 'italic',
         fontWeight: 'bold',
-        fill: ['#ffffff', '#00ff99'], // gradient
+        fill: ['#ffffff', '#00ff99'],
         stroke: '#4a1850',
         strokeThickness: 5,
         dropShadow: true,
@@ -184,6 +186,8 @@ export class TextButton extends PIXI.Text {
 }
 
 
+
+//generic menu scene class that display vertical menu using textbuttons
 export class TextMenuScene extends Scene {
     public buttons = new PIXI.Sprite()
     constructor(engine: AppEngine) {
@@ -207,24 +211,4 @@ export class TextMenuScene extends Scene {
     }
 }
 
-export const EasingsFunc = {
-    "Linear": function (t: number) {
-        return t
-    },
-    "BounceIn": function (t: number) {
-        return 1 - EasingsFunc.BounceOut(1 - t);
-    },
-    "BounceOut": function (t: number) {
-        if (t < (1 / 2.75)) { return 7.5625 * t * t; }
-        else if (t < (2 / 2.75)) { return 7.5625 * (t -= (1.5 / 2.75)) * t + 0.75; }
-        else if (t < (2.5 / 2.75)) { return 7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375; }
-        else { return 7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375; }
-    },
-    "BackOut": function (t: number) {
-        return --t * t * ((1.70158 + 1) * t + 1.70158) + 1;
-    },
 
-    "CubicOut": function (t: number) {
-        return (--t) * t * t + 1;
-    },
-}

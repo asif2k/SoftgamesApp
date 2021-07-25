@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 
 import SoftgamesScene from './SoftgamesScene';
 import { ObjectsPool } from './utils';
-import { EasingsFunc } from './PIXIAppEngine';
+import { EasingsFunc } from './utils';
 
 //regular expression to match the tags in input
 let rgTags = new RegExp("\<[\\s\\S]*?\/\>", "g")
@@ -222,10 +222,12 @@ export default class EmojiTextScene extends SoftgamesScene {
         this.sampleImages = Object.keys(TextImages.ImagesList)
 
         this.generateRandomSample()
-        // this.textImages.setText("<fs 12/>any <fs 44/>when be <fc #58b3a5/>gets <fs 54/><fc #7aee26/>done<mg m27x19/><fc #5e0c5f/>for design gets")
+
     }
+
+
     public generateRandomSample() {
-        //return
+
         const parts: string[] = []
         const partsCount = Math.floor(Math.random() * 10) + 4
         let lastPartType = 0;
@@ -256,6 +258,8 @@ export default class EmojiTextScene extends SoftgamesScene {
         this.textImages.setText(parts.join(""))
     }
     public init(loader: PIXI.Loader) {
+
+        // load texture sheets for emojis
         loader.add('emojione', 'images/emojione.png')
         loader.add('emojione2', 'images/emojione2.png')
     }
@@ -272,9 +276,8 @@ export default class EmojiTextScene extends SoftgamesScene {
 
             this.textImages.update()
 
-
+            // check if text animated out of the screen that create another random text
             if (newY > this.engine.renderer.height && this.textImages.y < this.engine.renderer.height) {
-                // console.log("generate new sample now")
                 this.generateRandomSample();
             }
             this.textImages.y = newY;
