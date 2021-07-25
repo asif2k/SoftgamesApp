@@ -43,6 +43,7 @@ export class AppEngine {
 
     private requiredTimeDelta: number = 1 / 60
     public currentFps = 0
+    public clock = 0;
     constructor(container: HTMLElement) {
 
         this.container = container
@@ -90,6 +91,7 @@ export class AppEngine {
         let fpsCounter = 0;
         const tick = () => {
 
+
             currentTime = performance.now() * 0.001;
             currentTimeDelta = currentTime - lastTime;
             //console.log(currentTimeDelta, this.requiredTimeDelta)
@@ -110,6 +112,7 @@ export class AppEngine {
                 this.renderer.render(this.currentScene)
             }
             lastTime = currentTime - (currentTimeDelta % this.requiredTimeDelta);
+            this.clock += currentTimeDelta
 
         }
 
@@ -157,14 +160,24 @@ export class TextButton extends PIXI.Text {
         this.on('pointerover', () => {
             this.tint = 0xFF0000;
         })
+        this.on('touchstart', () => {
+            this.tint = 0xFF0000;
+        })
 
         this.on('click', () => {
+            onClick();
+        })
+
+        this.on('touchend', () => {
+            this.tint = 0xFFFFFF;
             onClick();
         })
 
         this.on('pointerout', () => {
             this.tint = 0xFFFFFF;
         })
+
+
 
 
     }

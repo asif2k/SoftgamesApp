@@ -5,8 +5,10 @@ import * as PIXI from 'pixi.js'
 import { AppEngine, TextMenuScene } from './PIXIAppEngine';
 
 
-import CardsDeckScene from './CardsDeck';
-import EmojiTextScene from './EmojiText';
+import CardsDeckScene from './CardsDeckScene';
+import EmojiTextScene from './EmojiTextScene';
+
+import FireEffectScene from './FireEffectScene';
 
 
 export default class SoftgamesApp extends AppEngine {
@@ -37,12 +39,14 @@ export default class SoftgamesApp extends AppEngine {
         const loader = new PIXI.Loader()
         const cardsDeckScene = new CardsDeckScene(this, returnToMenu)
         const emojiTextScene = new EmojiTextScene(this, returnToMenu)
+        const fireEffectScene = new FireEffectScene(this, returnToMenu)
 
 
 
         cardsDeckScene.init(loader);
         emojiTextScene.init(loader);
 
+        fireEffectScene.init(loader);
 
         menu.add("CARDS DECK", () => {
             this.setActiveScene("cards-deck");
@@ -53,7 +57,7 @@ export default class SoftgamesApp extends AppEngine {
         })
 
         menu.add("FIRE EFFECT", () => {
-
+            this.setActiveScene("fire-effect");
         })
 
 
@@ -61,6 +65,8 @@ export default class SoftgamesApp extends AppEngine {
         this.addScene("menu", menu);
         this.addScene("cards-deck", cardsDeckScene)
         this.addScene("emoji-text", emojiTextScene)
+
+        this.addScene("fire-effect", fireEffectScene)
 
         this.setActiveScene("menu")
 
@@ -75,6 +81,11 @@ export default class SoftgamesApp extends AppEngine {
 
             emojiTextScene.build(resources)
             emojiTextScene.resize(this.renderer.width, this.renderer.height)
+
+
+            fireEffectScene.build(resources)
+            fireEffectScene.resize(this.renderer.width, this.renderer.height)
+
 
             this.start(() => {
 
