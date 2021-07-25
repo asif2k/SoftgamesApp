@@ -1,7 +1,8 @@
 
 ## Job Test Application Project
 
-Application is a collection of three parts, application can be make full screen using full screen option in main menu.
+Application is a collection of three parts, that is implemented using webpack ,typescript and pixijs.
+
 
 ## Card Deck Demo
 
@@ -36,5 +37,5 @@ In order for max performance and with the limited number of sprites instead of u
 
 
 
-
+Demo can be make full screen using full screen option in main menu.
 [Application Demo](https://asif2k.github.io/portfolio/softgames/)
