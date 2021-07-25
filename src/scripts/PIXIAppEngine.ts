@@ -52,10 +52,6 @@ export class AppEngine {
         this.container = container
         this.loader = PIXI.Loader.shared;
         this.renderer = PIXI.autoDetectRenderer({ width: 100, height: 100, antialias: true });
-
-
-
-
         container.appendChild(this.renderer.view);
 
         setTimeout(() => {
@@ -94,7 +90,7 @@ export class AppEngine {
         let fpsCounter = 0;
         const tick = () => {
 
-
+            requestAnimationFrame(tick);
             currentTime = performance.now() * 0.001;
             currentTimeDelta = currentTime - lastTime;
             if (currentTimeDelta < this.requiredTimeDelta) {
@@ -115,19 +111,8 @@ export class AppEngine {
             }
             lastTime = currentTime - (currentTimeDelta % this.requiredTimeDelta);
             this.clock += currentTimeDelta
-
         }
-
-        const step1 = () => {
-            tick()
-            requestAnimationFrame(step2);
-        }
-        const step2 = () => {
-            tick()
-            requestAnimationFrame(step1);
-        }
-
-        requestAnimationFrame(step1);
+        tick()
     }
 
 }
