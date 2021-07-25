@@ -30,7 +30,6 @@ export class ScenesManager {
 
     public add(name: string, scene: Scene): Scene {
         this.scenes.set(name, scene)
-        console.log(scene)
         return (scene)
     }
 }

@@ -23,8 +23,7 @@ export default class SoftgamesApp extends AppEngine {
 
         const fpsDisplay = document.createElement('div')
         fpsDisplay.style.position = "absolute";
-        fpsDisplay.style.left = "10px";
-        fpsDisplay.style.top = "10px";
+
         fpsDisplay.style.color = "#ffffff";
         fpsDisplay.style.fontSize = "26px"
 
@@ -77,8 +76,13 @@ export default class SoftgamesApp extends AppEngine {
         this.addScene("fire-effect", fireEffectScene)
 
         this.setActiveScene("menu")
+        fpsDisplay.style.left = "0";
+        fpsDisplay.style.top = "50%";
+        fpsDisplay.style.width = "100%";
+        fpsDisplay.style.textAlign = "center";
 
 
+        fpsDisplay.innerHTML = "Loading please wait..."
 
         window.addEventListener("resize", () => { this.resize() })
         loader.load((loader, resources: Partial<Record<string, PIXI.LoaderResource>>) => {
@@ -94,7 +98,9 @@ export default class SoftgamesApp extends AppEngine {
             fireEffectScene.build(resources)
             fireEffectScene.resize(this.renderer.width, this.renderer.height)
 
-
+            fpsDisplay.style.left = "10px";
+            fpsDisplay.style.top = "10px";
+            fpsDisplay.style.width = "auto";
             this.start(() => {
 
             })
